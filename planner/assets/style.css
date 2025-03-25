@@ -1,0 +1,109 @@
+* {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  text-align: center;
+  font-weight: 600;
+}
+.wrap {
+  width: 360px;
+  display: flex;
+  justify-content: center;
+}
+.input {
+  width: 300px;
+  height: 32px;
+  border: none;
+  font-style: italic;
+  color: rgb(30, 69, 25);
+  font-size: 1rem;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  outline: 1px solid rgb(125, 125, 125);
+}
+.input:focus-visible{
+  outline: 1px solid rgba(72, 162, 72, 0.319);
+  background-color: rgba(72, 162, 72, 0.319);
+}
+.button {
+  width: 60px;
+  height: 34px;
+  background-color: rgb(72, 162, 72);
+  border: none;
+  outline: 1px solid rgb(69, 146, 69);
+  color: azure;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: rgba(72, 162, 72, 0.67);
+  outline: 1px solid rgba(72, 162, 72, 0.67);
+}
+.button:active {
+  background-color: rgba(72, 162, 72, 0.389);
+  outline: 1px solid rgba(72, 162, 72, 0.67);
+  color: rgb(37, 84, 37);
+}
+.subtitle {
+  text-align: center;
+  font-weight: 600;
+}
+.textNoTasks {
+  color: grey;
+}
+.textNoTasks_none {
+  display: none;
+}
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+.item {
+  font-size: 1.5rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.item_checked {
+  text-decoration:line-through;
+  color: grey;
+}
+.button_large {
+  width: 200px;
+}
+.button:disabled {
+  background-color: rgb(151, 151, 151);
+  border: none;
+  outline: 1px solid rgb(151, 151, 151);
+  color: azure;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  cursor: pointer;
+}
+.wrapTaskItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.5rem;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+
+}
+.checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.no_error {
+  display: none;
+}
+.error {
+  display: block;
+  color:chocolate;
+  font-size: 1.3rem;
+}

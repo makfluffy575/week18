@@ -4,8 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/style.css" />
   </head>
-  <body>
+  <body class="container">
+    <h1 class="title">Daily planner</h1>
+    <div class="wrap">
+      <input
+        type="text"
+        class="input"
+        id="inputElem"
+        placeholder="Put your task"
+        value=""
+        autocomplete="off"
+      />
+      <button type="button" class="button" id="btn" onclick="addTask()">
+        Add
+      </button>
+    </div>
+    <p class="no_error">Please, put your task</p>
+    <h2 class="subtitle">Task list</h2>
+    <div class="textNoTasks">No tasks</div>
+    <ul class="list"></ul>
+    <button
+      type="button"
+      class="button button_large"
+      id="btn"
+      onclick="clearAllTasks()"
+      disabled
+    >
+      Clear all tasks
+    </button>
     <script src="index.js"></script>
   </body>
 </html>

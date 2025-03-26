@@ -103,6 +103,7 @@ const dataJson = `[
 
 //распарсиваем данные
 const heroes = JSON.parse(dataJson);
+console.log(heroes);
 
 //запускаем после загрузки страницы
 document.addEventListener("DOMContentLoaded", function () {
@@ -125,41 +126,56 @@ document.addEventListener("DOMContentLoaded", function () {
         <img class="img" src="${hero.url}" alt="image"/>
       </div>
       <div class="checkboxContainer">
-        <label class="checkbox" name="checkbox1">
+        <label class="checkbox">
           <svg class="icon_star">
             <use xlink:href="./assets/icons/sprite.svg#star"></use>
           </svg>
         </label>
-        <input type="checkbox" id="checkbox1"/>
-        <label class="checkbox" name="checkbox2">
+        <input class="inputCheckbox" type="checkbox"/>
+        <label class="checkbox">
           <svg class="icon_star">
             <use xlink:href="./assets/icons/sprite.svg#star"></use>
           </svg>
           </label>
-        <input type="checkbox" id="checkbox2"/>
-        <label class="checkbox" name="checkbox3">
+        <input class="inputCheckbox" type="checkbox"/>
+        <label class="checkbox">
           <svg class="icon_star">
             <use xlink:href="./assets/icons/sprite.svg#star"></use>
           </svg>
         </label>
-        <input type="checkbox" id="checkbox3"/>
-        <label class="checkbox" name="checkbox4">
+        <input class="inputCheckbox" type="checkbox"/>
+        <label class="checkbox">
           <svg class="icon_star">
             <use xlink:href="./assets/icons/sprite.svg#star"></use>
           </svg>
         </label>
-        <input type="checkbox" id="checkbox4"/>
-        <label class="checkbox" name="checkbox5">
+        <input class="inputCheckbox" type="checkbox"/>
+        <label class="checkbox">
           <svg class="icon_star">
             <use xlink:href="./assets/icons/sprite.svg#star"></use>
           </svg>
         </label>
-        <input type="checkbox" id="checkbox5"/>
+        <input class="inputCheckbox" type="checkbox"/>
       </div>
     </div>  
-    </div>`; 
-  }
-  document.querySelector(".heroesContainer").innerHTML = heroesInfo;
+  </div>`;
+} 
+
+document.querySelector(".heroesContainer").innerHTML = heroesInfo;
+
+//устанавливаем for и id для чекбоксов
+const checkboxCollection = document.querySelectorAll(".inputCheckbox");
+
+const labelCollection = document.querySelectorAll(".checkbox");
+
+for (let i=0; i<checkboxCollection.length; i++) {
+  let idNumber = i+1;
+  checkboxCollection[i].setAttribute("id", `checkbox${idNumber}`);
+  labelCollection[i].setAttribute("for", `checkbox${idNumber}`);
+}
+
+
+
 
   //получаем коллекцию карточек
   const heroCards = document.querySelectorAll(".heroCard");
@@ -168,12 +184,12 @@ document.addEventListener("DOMContentLoaded", function () {
   heroCards.forEach(item => {
     item.addEventListener("click", function (evt) {
       if (evt.target.matches("button.btn")) {
-        item.classList.add("wrapInfo");
+        item.classList.toggle("wrapInfo");
 
-        //скрываем элементы карточки
-        const childList = item.querySelectorAll('*');
-        for (let childNode of childList) {
-          childNode.classList.add('display_none');
+        //скрываем существующие элементы карточки
+        const childList = item.querySelectorAll("*");
+        for (let child of childList) {
+          child.classList.toggle("display_none");
         }
         
         //добавляем доп.инфу о герое
@@ -188,23 +204,25 @@ document.addEventListener("DOMContentLoaded", function () {
             infoText.innerText = infoTextContent;            
           }
         }
-        
+
         //добавляем кнопку закрыть доп.инфу
         const btnClose = document.createElement("button");
         btnClose.classList.add("btnClose");
+
 
         //складываем элементы с доп.инфой в один контейнер
         const textInfoContainer = document.createElement("div");
         textInfoContainer.setAttribute("class", "textInfoContainer");
         textInfoContainer.append(heroName, infoText, btnClose);
         item.prepend(textInfoContainer);
+          
 
         //добавляем обработчик клика по кнопке закрыть
-        btnClose.addEventListener("click", function () {
-          item.classList.remove("wrapInfo");
+          btnClose.addEventListener("click", function () {
+          item.classList.toggle("wrapInfo");
           item.removeChild(textInfoContainer);
           for (let childNode of childList) {
-            childNode.classList.remove('display_none');
+            childNode.classList.toggle('display_none');
           }
         });
       }  

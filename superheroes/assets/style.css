@@ -100,12 +100,12 @@ button {
 
 /* чекбоксы с оценками */
 .checkboxContainer {
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
 }
-input {
+.inputCheckbox {
   width: 1px;
   height: 1px;
   opacity: 0;

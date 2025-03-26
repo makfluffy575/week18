@@ -1,3 +1,4 @@
+/* шрифты */
 @font-face {
   src: url(./fonts/ofont.ru_Flow.ttf), format("ttf");
   font-family: "Flow";
@@ -10,6 +11,8 @@
   src: url(./fonts/MarvelRegular-Dj83.ttf), format("ttf");
   font-family: "Marvel";
 }
+
+/* общие стили */
 *{
   font-family: "Flow";
   padding: 0;
@@ -18,6 +21,8 @@
 button {
   cursor: pointer;
 }
+
+/* стили заголовков */
 .title {
   font-family: "Flow";
   text-align: center;
@@ -42,22 +47,33 @@ button {
   font-size: 2.5rem;
   color: black;
 }
+
+/* контейнер с карточками героев */
 .heroesContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1rem;
+  column-gap: 1rem;
+  row-gap: 3.5rem;
   margin: 0 3rem 0 3rem;
 }
+
+/* карточка героя */
 .heroCard {
-  height: 650px;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   border: 3px black double;
   border-radius: 10px;
   padding: 1rem;
 }
+.upperWrap, .lowerWrap {
+  display: flex;
+  flex-direction: column;
+}
 .subtitle {
   align-self: center;
+  margin-bottom: 1rem;
 }
 .btn {
   margin-bottom: 1rem;
@@ -81,6 +97,34 @@ button {
   height: 100%;
   object-fit: cover;
 }
+
+/* чекбоксы с оценками */
+.checkboxContainer {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+input {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: relative;
+  top:1.6rem;
+  left: -1.5rem;
+}
+.checkbox {
+  width: 3rem;
+  height: 3rem;
+}
+.icon_star {
+  width: 3rem;
+  height: 3rem;
+  fill: rgb(138, 138, 138);
+}
+
+
+/* стили для доп инфо */
 .wrapInfo {
   height: auto;
   display: flex;
@@ -112,10 +156,23 @@ button {
   background-repeat: no-repeat;
   border: transparent;
 }
+
+/* эффекты */
 button:hover {
   transform: rotateX(360deg);
   transition: all 1s ease-in-out;
 }
 button:active {
   opacity: 40%;
+}
+.icon_star:hover{
+  fill: rgb(255, 217, 0)
+}
+.icon_star:active{
+  fill: rgba(255, 217, 0, 0.627)
+}
+
+/* проставление оценок */
+.checkbox:hover + .icon_star:hover{
+
 }

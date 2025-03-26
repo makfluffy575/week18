@@ -101,40 +101,82 @@ const dataJson = `[
   }
 ]`
 
-document.addEventListener("DOMContentLoaded", function (evt) {
-  const heroes = JSON.parse(dataJson);
-  console.log(heroes);
+//распарсиваем данные
+const heroes = JSON.parse(dataJson);
 
+//запускаем после загрузки страницы
+document.addEventListener("DOMContentLoaded", function () {
 
+  //добавляем карточки с инфой на страницу
   let heroesInfo = "";
   for (let hero of heroes) {
-    heroesInfo += `<div class="heroCard"><button class="btn"></button>
-    <h2 class="subtitle">${hero.name}</h2>
-    <p class="textInfo">Вселенная: ${hero.universe}</p>
-    <p class="textInfo">Альтерэго: ${hero.alterego}</p>
-    <p class="textInfo">Род занятий: ${hero.occupation}</p>
-    <p class="textInfo">Друзья: ${hero.friends}</p>
-    <p class="textInfo">Суперсилы: ${hero.superpowers}</p>
-    <div class="wrapImg"><img class="img" src="${hero.url}" alt="image"/></div>
-    </div>`;
-    
+    heroesInfo += `<div class="heroCard">
+    <div class="upperWrap">
+    <button class="btn"></button>
+      <h2 class="subtitle">${hero.name}</h2>
+      <p class="textInfo">Вселенная: ${hero.universe}</p>
+      <p class="textInfo">Альтерэго: ${hero.alterego}</p>
+      <p class="textInfo">Род занятий: ${hero.occupation}</p>
+      <p class="textInfo">Друзья: ${hero.friends}</p>
+      <p class="textInfo">Суперсилы: ${hero.superpowers}</p>
+    </div>
+    <div class="lowerWrap">
+    <div class="wrapImg">
+        <img class="img" src="${hero.url}" alt="image"/>
+      </div>
+      <div class="checkboxContainer">
+        <label class="checkbox" name="checkbox1">
+          <svg class="icon_star">
+            <use xlink:href="./assets/icons/sprite.svg#star"></use>
+          </svg>
+        </label>
+        <input type="checkbox" id="checkbox1"/>
+        <label class="checkbox" name="checkbox2">
+          <svg class="icon_star">
+            <use xlink:href="./assets/icons/sprite.svg#star"></use>
+          </svg>
+          </label>
+        <input type="checkbox" id="checkbox2"/>
+        <label class="checkbox" name="checkbox3">
+          <svg class="icon_star">
+            <use xlink:href="./assets/icons/sprite.svg#star"></use>
+          </svg>
+        </label>
+        <input type="checkbox" id="checkbox3"/>
+        <label class="checkbox" name="checkbox4">
+          <svg class="icon_star">
+            <use xlink:href="./assets/icons/sprite.svg#star"></use>
+          </svg>
+        </label>
+        <input type="checkbox" id="checkbox4"/>
+        <label class="checkbox" name="checkbox5">
+          <svg class="icon_star">
+            <use xlink:href="./assets/icons/sprite.svg#star"></use>
+          </svg>
+        </label>
+        <input type="checkbox" id="checkbox5"/>
+      </div>
+    </div>  
+    </div>`; 
   }
-  
   document.querySelector(".heroesContainer").innerHTML = heroesInfo;
-  
+
+  //получаем коллекцию карточек
   const heroCards = document.querySelectorAll(".heroCard");
+
+  //запускаем обработчик клика для получения доп инфы о супергерое
   heroCards.forEach(item => {
-    item.addEventListener("click", function showInfo (evt) {
+    item.addEventListener("click", function (evt) {
       if (evt.target.matches("button.btn")) {
-
-        
-
         item.classList.add("wrapInfo");
+
+        //скрываем элементы карточки
         const childList = item.querySelectorAll('*');
         for (let childNode of childList) {
           childNode.classList.add('display_none');
         }
         
+        //добавляем доп.инфу о герое
         const heroName = document.createElement("h2");
         heroName.textContent = item.querySelector(".subtitle").textContent;
         const infoText = document.createElement("p");
@@ -146,42 +188,26 @@ document.addEventListener("DOMContentLoaded", function (evt) {
             infoText.innerText = infoTextContent;            
           }
         }
-
-        item.prepend(heroName);
-        item.append(infoText);
         
+        //добавляем кнопку закрыть доп.инфу
         const btnClose = document.createElement("button");
         btnClose.classList.add("btnClose");
-        item.append(btnClose);
 
-        btnClose.addEventListener("click", function (evt) {
+        //складываем элементы с доп.инфой в один контейнер
+        const textInfoContainer = document.createElement("div");
+        textInfoContainer.setAttribute("class", "textInfoContainer");
+        textInfoContainer.append(heroName, infoText, btnClose);
+        item.prepend(textInfoContainer);
+
+        //добавляем обработчик клика по кнопке закрыть
+        btnClose.addEventListener("click", function () {
           item.classList.remove("wrapInfo");
-          item.removeChild(heroName);
-          item.removeChild(infoText);
-          item.removeChild(btnClose);
+          item.removeChild(textInfoContainer);
           for (let childNode of childList) {
             childNode.classList.remove('display_none');
           }
-
-
-        })
+        });
       }  
     })
-  });  
-
-});
-// const closeText = () => {  
-//   const heroCards = document.querySelectorAll(".heroCard");
-//   heroCards.forEach(item => {
-//     item.addEventListener("click", function (evt) {
-//       if (evt.target.tagName === "BUTTON") {
-//         item.classList.toggle("wrapInfo", "heroCards");
-//         const childList = item.querySelectorAll('*');
-//         for (let childNode of childList) {
-//           childNode.classList.toggle('display_none');
-//         }
-//         const btnClose = item.querySelector(".btnClose");
-//         btnClose.classList.add("display_none")
-//     }
-//     })
-  // });
+  });
+}); 

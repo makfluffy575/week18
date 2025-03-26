@@ -1,0 +1,121 @@
+@font-face {
+  src: url(./fonts/ofont.ru_Flow.ttf), format("ttf");
+  font-family: "Flow";
+}
+@font-face {
+  src: url(./fonts/DCFandom.ttf), format("ttf");
+  font-family: "DC Comics";
+}
+@font-face {
+  src: url(./fonts/MarvelRegular-Dj83.ttf), format("ttf");
+  font-family: "Marvel";
+}
+*{
+  font-family: "Flow";
+  padding: 0;
+  margin: 0;
+}
+button {
+  cursor: pointer;
+}
+.title {
+  font-family: "Flow";
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+}
+.titleWrap {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.title_Marvel {
+  font-family: "Marvel";
+  text-align: center;
+  font-size: 3.3rem;
+  margin: 1.25rem 0 2rem 0;
+}
+.title_DC {
+  font-family: "DC Comics";
+  text-align: center;
+  margin: 1.8rem 0 2rem 0;
+  font-size: 2.5rem;
+  color: black;
+}
+.heroesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1rem;
+  margin: 0 3rem 0 3rem;
+}
+.heroCard {
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  border: 3px black double;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.subtitle {
+  align-self: center;
+}
+.btn {
+  margin-bottom: 1rem;
+  align-self: end;
+  width: 5rem;
+  height: 4rem;
+  background-image: url("./img/clickMe.jpg");
+  background-size: cover;
+  background-color: transparent;
+  border: transparent;
+}
+.textInfo {
+  margin-top: 0.3rem;
+}
+.wrapImg{
+  margin: 1rem 0 1rem 0;
+
+}
+.img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wrapInfo {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: beige;
+  border: 3px black double;
+  border-radius: 10px;
+  padding: 3rem 1rem 1rem 1rem;
+}
+.display_none {
+  display: none;
+}
+.fullTextInfo {
+  margin-top: 2rem;
+  text-align: left;
+  font-size: 1rem;
+}
+.btnClose {
+  margin-top: 1rem;
+  width: 150px;
+  height: 6rem;
+  align-self: center;
+  background-image: url("./img/cool.png");
+  background-size: contain;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: transparent;
+}
+button:hover {
+  transform: rotateX(360deg);
+  transition: all 1s ease-in-out;
+}
+button:active {
+  opacity: 40%;
+}

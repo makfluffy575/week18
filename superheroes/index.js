@@ -273,22 +273,22 @@ for (let i=0; i<checkboxCollection.length; i++) {
               let filterGradesLS = [];
               gradesLS.map(i => {
                 if (i.heroName !== item.querySelector(".subtitle").textContent) {
-                  filterGradesLS.push(i)
+                  filterGradesLS.push(i);
                 }
             });
+
             const newGradesLS = filterGradesLS.concat(gradesArr);
             localStorage.setItem("grades", JSON.stringify(newGradesLS));
             for (let i=newGradesLS.length-1; i>=0; i--) {
               newGradesLS.pop();
             }
           }
-            
-          }
+          
         }
-        // console.log(checkboxStatus);  
-      });
-
+      }
     });
+
+  });
   
 
   

@@ -168,6 +168,8 @@ const checkboxCollection = document.querySelectorAll(".inputCheckbox");
 
 const labelCollection = document.querySelectorAll(".checkbox");
 
+
+
 for (let i=0; i<checkboxCollection.length; i++) {
   let idNumber = i+1;
   checkboxCollection[i].setAttribute("id", `checkbox${idNumber}`);
@@ -175,13 +177,13 @@ for (let i=0; i<checkboxCollection.length; i++) {
 }
 
 
-
-
   //получаем коллекцию карточек
   const heroCards = document.querySelectorAll(".heroCard");
 
-  //запускаем обработчик клика для получения доп инфы о супергерое
+  
   heroCards.forEach(item => {
+
+    //запускаем обработчик клика для получения доп инфы о супергерое
     item.addEventListener("click", function (evt) {
       if (evt.target.matches("button.btn")) {
         item.classList.toggle("wrapInfo");
@@ -227,5 +229,68 @@ for (let i=0; i<checkboxCollection.length; i++) {
         });
       }  
     })
-  });
+
+    item.addEventListener("click", function (evt) {
+      if (evt.target.tagName === "INPUT") {
+
+        //установим value для чекбоксов
+        const itemCheckboxCollection = item.querySelectorAll(".inputCheckbox");
+
+        let value = 0;
+        let inputArr = [];
+
+        itemCheckboxCollection.forEach(input => {
+          const inputId = input.id;
+          inputArr.push(inputId);
+          value = inputArr.indexOf(input.id) + 1;
+          input.setAttribute("value", value);
+        })
+
+        //если кликнули по чекбоксу
+        let checkboxStatus = false;
+        
+        if (evt.target.checked) {
+          
+          checkboxStatus = true;
+          class Grades {
+            constructor (heroName, grade) {
+            this.heroName = heroName;
+            this.grade = grade;
+            }
+          }
+          const gradeHero = new Grades();
+          gradeHero.heroName = item.querySelector(".subtitle").textContent;
+          gradeHero.grade = evt.target.value;
+
+          let gradesArr = [];
+          gradesArr.push(gradeHero);
+
+          const gradesLS = JSON.parse(localStorage.getItem("grades"));
+
+          if (gradesLS == null) {
+            localStorage.setItem("grades", JSON.stringify(gradesArr));
+            } else { 
+              let filterGradesLS = [];
+              gradesLS.map(i => {
+                if (i.heroName !== item.querySelector(".subtitle").textContent) {
+                  filterGradesLS.push(i)
+                }
+            });
+            const newGradesLS = filterGradesLS.concat(gradesArr);
+            localStorage.setItem("grades", JSON.stringify(newGradesLS));
+            for (let i=newGradesLS.length-1; i>=0; i--) {
+              newGradesLS.pop();
+            }
+          }
+            
+          }
+        }
+        // console.log(checkboxStatus);  
+      });
+
+    });
+  
+
+  
 }); 
+// localStorage.clear();

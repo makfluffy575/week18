@@ -158,11 +158,10 @@ const addTask = () => {
     // console.log(localStorage);
   } else {
     localStorage.setItem("tasks", JSON.stringify(tasksArr));
-    tasksArr.pop();
     // console.log(localStorage);
   }
 
-  
+
   //записываем значение в список задач
   const newTasksLS = JSON.parse(localStorage.getItem("tasks"));
 

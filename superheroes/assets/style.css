@@ -81,7 +81,7 @@ button {
   width: 5rem;
   height: 4rem;
   background-image: url("./img/clickMe.jpg");
-  background-size: cover;
+  background-size: contain;
   background-color: transparent;
   border: transparent;
 }

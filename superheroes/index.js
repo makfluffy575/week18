@@ -305,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
-
   });
   
 
@@ -318,18 +317,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
     if (gradesLS !== null) {
 
-
-      console.log(heroCards);
-      
-
-     
-
         heroCards.forEach(item => {
           for (let gradeLS of gradesLS){
           
-
           if (gradeLS.heroName === item.querySelector(".subtitle").textContent) { 
-            // console.log(gradesLS.heroName);
 
             const labels = item.querySelectorAll(".checkbox");
 
@@ -338,24 +329,16 @@ document.addEventListener("DOMContentLoaded", function () {
             labels.forEach(label => {
               if (+(gradeLS.id) === +(label.getAttribute("for").replace("checkbox", ""))) {
 
-                console.log(+(gradeLS.id));
-                console.log(+(label.getAttribute("for").replace("checkbox", "")));
-
-
                 label.querySelector(".icon_star").classList.add("icon_star_checked");
 
-                console.log(label.querySelector(".icon_star"));
               } else {
                 if (+(label.getAttribute("for").replace("checkbox", "")) < +(gradeLS.id)) {
                   label.querySelector(".icon_star").classList.add("icon_star_checked");
                 } 
               }
             });
-
           }
-
         }
-
       });
     }
   }

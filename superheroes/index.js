@@ -159,22 +159,22 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>  
   </div>`;
-} 
+  } 
 
-document.querySelector(".heroesContainer").innerHTML = heroesInfo;
+  document.querySelector(".heroesContainer").innerHTML = heroesInfo;
 
-//устанавливаем for и id для чекбоксов
-const checkboxCollection = document.querySelectorAll(".inputCheckbox");
+  //устанавливаем for и id для чекбоксов
+  const checkboxCollection = document.querySelectorAll(".inputCheckbox");
 
-const labelCollection = document.querySelectorAll(".checkbox");
+  const labelCollection = document.querySelectorAll(".checkbox");
 
 
 
-for (let i=0; i<checkboxCollection.length; i++) {
-  let idNumber = i+1;
-  checkboxCollection[i].setAttribute("id", `checkbox${idNumber}`);
-  labelCollection[i].setAttribute("for", `checkbox${idNumber}`);
-}
+  for (let i=0; i<checkboxCollection.length; i++) {
+    let idNumber = i+1;
+    checkboxCollection[i].setAttribute("id", `checkbox${idNumber}`);
+    labelCollection[i].setAttribute("for", `checkbox${idNumber}`);
+  }
 
 
   //получаем коллекцию карточек
@@ -249,11 +249,11 @@ for (let i=0; i<checkboxCollection.length; i++) {
         //если кликнули по чекбоксу        
         if (evt.target.checked) {
           
+          //закрашиваем звезды
           const labels = item.querySelectorAll(".checkbox");
 
           labels.forEach(label => {
-          
-              if (evt.target.id === label.getAttribute("for")) {
+            if (evt.target.id === label.getAttribute("for")) {
                 label.querySelector(".icon_star").classList.add("icon_star_checked");
               } else {
                 if (+(label.getAttribute("for").replace("checkbox", "")) < +(evt.target.id.replace("checkbox", ""))) {
@@ -262,50 +262,103 @@ for (let i=0; i<checkboxCollection.length; i++) {
                   label.querySelector(".icon_star").classList.remove("icon_star_checked");
                 }
               }
-
           });
           
-          
-        
-          
+          //создаем объект
           class Grades {
-            constructor (heroName, grade) {
+            constructor (heroName, grade, id) {
             this.heroName = heroName;
             this.grade = grade;
+            this.id = id;
             }
           }
           const gradeHero = new Grades();
           gradeHero.heroName = item.querySelector(".subtitle").textContent;
           gradeHero.grade = evt.target.value;
+          gradeHero.id = evt.target.id.replace("checkbox", "");
 
+          //кладем объект в массив
           let gradesArr = [];
           gradesArr.push(gradeHero);
 
+          //проверяем хранилище
           const gradesLS = JSON.parse(localStorage.getItem("grades"));
 
           if (gradesLS == null) {
+            //если пусто - добавляем массив в хранилище
             localStorage.setItem("grades", JSON.stringify(gradesArr));
-            } else { 
+            } else {
+              //если нет - проверяем актуальность оценки
               let filterGradesLS = [];
               gradesLS.map(i => {
                 if (i.heroName !== item.querySelector(".subtitle").textContent) {
                   filterGradesLS.push(i);
                 }
-            });
-
-            const newGradesLS = filterGradesLS.concat(gradesArr);
-            localStorage.setItem("grades", JSON.stringify(newGradesLS));
-            for (let i=newGradesLS.length-1; i>=0; i--) {
-              newGradesLS.pop();
+              });
+              //добавляем объект к предыдущему массиву 
+              const newGradesLS = filterGradesLS.concat(gradesArr);
+              localStorage.setItem("grades", JSON.stringify(newGradesLS));
+              for (let i=newGradesLS.length-1; i>=0; i--) {
+                newGradesLS.pop();
+              }
             }
-          }
         }
       }
     });
 
-
   });
   
-  
+
+
+  //проверяем хранилище после обновления страницы
+  const checkLS = () => {
+    const gradesLS = JSON.parse(localStorage.getItem("grades"));
+
+    console.log(gradesLS);
+    
+    if (gradesLS !== null) {
+
+
+      console.log(heroCards);
+      
+
+     
+
+        heroCards.forEach(item => {
+          for (let gradeLS of gradesLS){
+          
+
+          if (gradeLS.heroName === item.querySelector(".subtitle").textContent) { 
+            // console.log(gradesLS.heroName);
+
+            const labels = item.querySelectorAll(".checkbox");
+
+            console.log(labels);
+
+            labels.forEach(label => {
+              if (+(gradeLS.id) === +(label.getAttribute("for").replace("checkbox", ""))) {
+
+                console.log(+(gradeLS.id));
+                console.log(+(label.getAttribute("for").replace("checkbox", "")));
+
+
+                label.querySelector(".icon_star").classList.add("icon_star_checked");
+
+                console.log(label.querySelector(".icon_star"));
+              } else {
+                if (+(label.getAttribute("for").replace("checkbox", "")) < +(gradeLS.id)) {
+                  label.querySelector(".icon_star").classList.add("icon_star_checked");
+                } 
+              }
+            });
+
+          }
+
+        }
+
+      });
+    }
+  }
+  checkLS();
 }); 
 // localStorage.clear();

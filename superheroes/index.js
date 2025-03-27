@@ -246,12 +246,28 @@ for (let i=0; i<checkboxCollection.length; i++) {
           input.setAttribute("value", value);
         })
 
-        //если кликнули по чекбоксу
-        let checkboxStatus = false;
-        
+        //если кликнули по чекбоксу        
         if (evt.target.checked) {
           
-          checkboxStatus = true;
+          const labels = item.querySelectorAll(".checkbox");
+
+          labels.forEach(label => {
+          
+              if (evt.target.id === label.getAttribute("for")) {
+                label.querySelector(".icon_star").classList.add("icon_star_checked");
+              } else {
+                if (+(label.getAttribute("for").replace("checkbox", "")) < +(evt.target.id.replace("checkbox", ""))) {
+                  label.querySelector(".icon_star").classList.add("icon_star_checked");
+                } else {
+                  label.querySelector(".icon_star").classList.remove("icon_star_checked");
+                }
+              }
+
+          });
+          
+          
+        
+          
           class Grades {
             constructor (heroName, grade) {
             this.heroName = heroName;
@@ -283,14 +299,13 @@ for (let i=0; i<checkboxCollection.length; i++) {
               newGradesLS.pop();
             }
           }
-          
         }
       }
     });
 
+
   });
   
-
   
 }); 
 // localStorage.clear();
